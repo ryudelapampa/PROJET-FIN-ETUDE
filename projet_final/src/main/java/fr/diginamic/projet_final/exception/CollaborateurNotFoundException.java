@@ -1,32 +1,32 @@
 package fr.diginamic.projet_final.exception;
 
-public class CollabNotFoundException extends Exception {
+public class CollaborateurNotFoundException extends Exception {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public CollabNotFoundException() {
+	public CollaborateurNotFoundException() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public CollabNotFoundException(String message) {
+	public CollaborateurNotFoundException(String message) {
 		super(message);
 		// TODO Auto-generated constructor stub
 	}
 	
-	public CollabNotFoundException(Throwable cause) {
+	public CollaborateurNotFoundException(Throwable cause) {
 		super(cause);
 		// TODO Auto-generated constructor stub
 	}
 	
-	public CollabNotFoundException(String message, Throwable cause) {
+	public CollaborateurNotFoundException(String message, Throwable cause) {
 		super(message, cause);
 		// TODO Auto-generated constructor stub
 	}
 	
-	public CollabNotFoundException(String message, Throwable cause, boolean enableSuppression,
+	public CollaborateurNotFoundException(String message, Throwable cause, boolean enableSuppression,
 			boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 		// TODO Auto-generated constructor stub
