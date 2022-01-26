@@ -8,7 +8,7 @@ import fr.diginamic.projet_final.model.Service;
 
 public interface iCrudService extends CrudRepository<Service, Integer> {
 
-	@Query("select c from Collaborateur c where :service MEMBER OF c.services")
-	public Iterable<Collaborateur> findByServiceCollaborateurs(Service service);
+//	@Query("select c from Collaborateur c where :service MEMBER OF c.services")
+//	public Iterable<Collaborateur> findByServiceCollaborateurs(Service service);
 
 }
