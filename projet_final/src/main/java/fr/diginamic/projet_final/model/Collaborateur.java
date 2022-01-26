@@ -21,6 +21,7 @@ public class Collaborateur implements UserDetails{
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
 	private Integer id;
 	
+	@Column(name="USERNAME")
 	private String username;
 	
 	@NotNull
@@ -62,12 +63,12 @@ public class Collaborateur implements UserDetails{
 		inverseJoinColumns = @JoinColumn(name="ABSENCE_ID", referencedColumnName="ID"))
 	private Set<Absence> absences;
 	
-//	@NotNull
-//	@OneToMany
-//	@JoinTable(name = "COLAB_SERVICE",
-//			joinColumns = @JoinColumn(name = "COLAB_ID", referencedColumnName="ID"),
-//			inverseJoinColumns = @JoinColumn(name="SERVICE_ID", referencedColumnName="ID"))
-//	private Service service;
+	
+	@ManyToOne
+	@JoinTable(name = "COLAB_SERVICE",
+			joinColumns = @JoinColumn(name = "COLAB_ID"),
+			inverseJoinColumns = @JoinColumn(name="SERVICE_ID"))
+	private Service service;
 	
 	public Collaborateur() {
 		
