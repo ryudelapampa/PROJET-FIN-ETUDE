@@ -18,54 +18,56 @@ import fr.diginamic.projet_final.repository.iCrudAbsence;
 @CrossOrigin
 @RequestMapping("api/absence")
 public class ControllerAbsence {
-	
+
 	@Autowired
 	iCrudAbsence ca;
 
 	public ControllerAbsence() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@GetMapping("all")
-	public Iterable<Absence> getAbsence(){
+	public Iterable<Absence> getAbsence() {
 		return ca.findAll();
 	}
-	
+
 	@GetMapping("{id}")
 	public Optional<Absence> getAbsence(@PathVariable("id") Integer pid) throws Exception {
-		if (ca.findById(pid).isEmpty()){
-			String s = "Absenceorateur non trouveé , id: "+pid+" !!";
+		if (ca.findById(pid).isEmpty()) {
+			String s = "Absenceorateur non trouveé , id: " + pid + " !!";
 			throw new AbsenceNotFoundException(s);
 		}
 		return ca.findById(pid);
 	}
-	
+
 	@PostMapping
-	public Absence addAbsence(@Valid @RequestBody Absence absence, BindingResult result) throws AbsenceNotFoundException {
-		if ( result.hasErrors()) {
+	public Absence addAbsence(@Valid @RequestBody Absence absence, BindingResult result)
+			throws AbsenceNotFoundException {
+		if (result.hasErrors()) {
 			String s = result.toString();
 			throw new AbsenceNotFoundException(s);
 		}
 		return ca.save(absence);
 	}
-	
+
 	@DeleteMapping("{id}")
 	public ResponseEntity<String> deleteAbsence(@PathVariable("id") Integer pid) throws AbsenceNotFoundException {
-		if ( ca.findById(pid).isEmpty()) {
-			String s = "Absence non trouvé, id:"+pid+" !!";
+		if (ca.findById(pid).isEmpty()) {
+			String s = "Absence non trouvé, id:" + pid + " !!";
 			throw new AbsenceNotFoundException(s);
 		}
 		ca.deleteById(pid);
 		return ResponseEntity.status(HttpStatus.OK).body("Absence supprimé !");
 	}
-	
+
 	@PutMapping("{id}")
-	public Absence updateClient(@PathVariable("id") Integer pid,@RequestBody Absence absence) throws AbsenceNotFoundException {
+	public Absence updateAbsence(@PathVariable("id") Integer pid, @RequestBody Absence absence)
+			throws AbsenceNotFoundException {
 		if (pid != absence.getId()) {
 			String s = "Error pathvariable entre l'id : " + pid + " et l'Absence JSON " + absence + " !!";
 			throw new AbsenceNotFoundException(s);
 		}
-		if(ca.findById(pid).isEmpty()) {
+		if (ca.findById(pid).isEmpty()) {
 			String s = "Absence non trouvé, id: " + pid + " !!";
 			throw new AbsenceNotFoundException(s);
 		}
