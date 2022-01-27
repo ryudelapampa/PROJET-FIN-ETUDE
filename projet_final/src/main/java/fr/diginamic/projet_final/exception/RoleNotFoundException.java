@@ -4,7 +4,7 @@ public class RoleNotFoundException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
-	public RoleNotFoundException() {
+  public RoleNotFoundException() {
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -28,5 +28,5 @@ public class RoleNotFoundException extends Exception {
 		super(message, cause, enableSuppression, writableStackTrace);
 		// TODO Auto-generated constructor stub
 	}
-
+  
 }
