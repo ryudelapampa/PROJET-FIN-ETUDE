@@ -2,7 +2,9 @@ package fr.diginamic.projet_final.exception;
 
 public class RoleNotFoundException extends Exception {
 
-	public RoleNotFoundException() {
+	private static final long serialVersionUID = 1L;
+
+  public RoleNotFoundException() {
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -26,4 +28,5 @@ public class RoleNotFoundException extends Exception {
 		super(message, cause, enableSuppression, writableStackTrace);
 		// TODO Auto-generated constructor stub
 	}
+  
 }

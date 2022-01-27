@@ -2,6 +2,8 @@ package fr.diginamic.projet_final.exception;
 
 public class ServiceNotFoundException extends Exception {
 
+	private static final long serialVersionUID = 1L;
+
 	public ServiceNotFoundException() {
 		// TODO Auto-generated constructor stub
 	}

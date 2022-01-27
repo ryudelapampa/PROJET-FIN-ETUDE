@@ -27,12 +27,12 @@ public class ControllerCollaborateur {
 	}
 	
 	@GetMapping("all")
-	public Iterable<Collaborateur> getCollab(){
+	public Iterable<Collaborateur> getCollaborateur(){
 		return cc.findAll();
 	}
 	
 	@GetMapping("{id}")
-	public Optional<Collaborateur> getClient(@PathVariable("id") Integer pid) throws Exception {
+	public Optional<Collaborateur> getCollaborateur(@PathVariable("id") Integer pid) throws Exception {
 		if (cc.findById(pid).isEmpty()){
 			String s = "Collaborateur non trouveé , id: "+pid+" !!";
 			throw new CollaborateurNotFoundException(s);
@@ -41,7 +41,7 @@ public class ControllerCollaborateur {
 	}
 	
 	@PostMapping
-	public Collaborateur addClient(@Valid @RequestBody Collaborateur collaborateur, BindingResult result) throws CollaborateurNotFoundException {
+	public Collaborateur addCollaborateur(@Valid @RequestBody Collaborateur collaborateur, BindingResult result) throws CollaborateurNotFoundException {
 		if ( result.hasErrors()) {
 			String s = result.toString();
 			throw new CollaborateurNotFoundException(s);
@@ -60,7 +60,7 @@ public class ControllerCollaborateur {
 	}
 	
 	@PutMapping("{id}")
-	public Collaborateur updateClient(@PathVariable("id") Integer pid,@RequestBody Collaborateur collaborateur) throws CollaborateurNotFoundException {
+	public Collaborateur updateCollaborateur(@PathVariable("id") Integer pid,@RequestBody Collaborateur collaborateur) throws CollaborateurNotFoundException {
 		if (pid != collaborateur.getId()) {
 			String s = "Error pathvariable entre l'id : "+pid+" et le Collaborateur JSON "+collaborateur+" !!";
 			throw new CollaborateurNotFoundException(s);
