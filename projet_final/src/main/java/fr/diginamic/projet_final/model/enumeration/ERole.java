@@ -1,5 +1,5 @@
 package fr.diginamic.projet_final.model.enumeration;
 
-public enum Role {
+public enum ERole {
 	SALARIE, MANAGER, ADMINISTRATEUR
 }

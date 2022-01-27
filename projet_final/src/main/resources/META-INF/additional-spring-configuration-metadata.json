@@ -1,0 +1,32 @@
+{"properties": [
+  {
+    "name": "bezkoder.app.jwtSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'bezkoder.app.jwtSecret'"
+  },
+  {
+    "name": "projet_final.app.jwtSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'projet_final.app.jwtSecret'"
+  },
+  {
+    "name": "projet_final.app.jwtSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'projet_final.app.jwtSecret'"
+  },
+  {
+    "name": "projet_final.app.jwtExpirationMs",
+    "type": "java.lang.String",
+    "description": "A description for 'projet_final.app.jwtExpirationMs'"
+  },
+  {
+    "name": "projet_final.app.jwtSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'projet_final.app.jwtSecret'"
+  },
+  {
+    "name": "projet_final.app.jwtSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'projet_final.app.jwtSecret'"
+  }
+]}

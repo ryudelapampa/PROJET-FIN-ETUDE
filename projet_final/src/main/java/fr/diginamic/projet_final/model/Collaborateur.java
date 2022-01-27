@@ -21,6 +21,7 @@ public class Collaborateur implements UserDetails{
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
 	private Integer id;
 	
+	@NotNull
 	@Column(name="USERNAME")
 	private String username;
 	
@@ -53,9 +54,9 @@ public class Collaborateur implements UserDetails{
 	@NotNull
 	@ManyToMany
 	@JoinTable(name="COLAB_ROLE",
-		joinColumns= @JoinColumn(name="COLAB_ID", referencedColumnName="ID"),
-		inverseJoinColumns= @JoinColumn(name="ROLE_ID", referencedColumnName="ID"))
-	private Set<Role> roles;
+		joinColumns= @JoinColumn(name="COLAB_ID"),
+		inverseJoinColumns= @JoinColumn(name="ROLE_ID"))
+	private Set<Role> roles = new HashSet<>();
 
 	@OneToMany
 	@JoinTable(name = "COLAB_ABSENCE",
@@ -75,32 +76,28 @@ public class Collaborateur implements UserDetails{
 	}
 
 	public Collaborateur(@NotNull String nom, @NotNull String prenom, @NotNull Date dateEmbauche, @NotNull String email,
-			@NotNull Integer telephone, @NotNull Set<Role> roles, Set<Absence> absences, String password) {
+			@NotNull Integer telephone, Set<Absence> absences, String password,String username) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.dateEmbauche = dateEmbauche;
 		this.email = email;
 		this.telephone = telephone;
-		this.roles = roles;
 		this.absences = absences;
-//		this.service = service;
-		this.username = email;
+		this.username = username;
 		this.password = password;
 	}
 	
 	public Collaborateur(@NotNull String nom, @NotNull String prenom, @NotNull Date dateEmbauche, @NotNull String email,
-			@NotNull Integer telephone, @NotNull Set<Role> roles,String password)  {
+			@NotNull Integer telephone,String password,String username)  {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.dateEmbauche = dateEmbauche;
 		this.email = email;
 		this.telephone = telephone;
-		this.roles = roles;
 		this.absences = new HashSet<Absence>();
-//		this.service = service;
-		this.username = email;
+		this.username = username;
 		this.password = password;
 	}
 
@@ -166,7 +163,7 @@ public class Collaborateur implements UserDetails{
 
 	public void setAbsence(Set<Absence> absences) {
 		this.absences = absences;
-	}
+	}	
 	
 	//SECURITY
 

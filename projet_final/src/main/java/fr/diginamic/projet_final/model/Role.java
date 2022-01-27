@@ -3,6 +3,8 @@ package fr.diginamic.projet_final.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import fr.diginamic.projet_final.model.enumeration.ERole;
+
 @Entity
 @Table(name="Role")
 public class Role {
@@ -14,16 +16,17 @@ public class Role {
 	private Integer id;
 	
 	@NotNull
+	@Enumerated(EnumType.STRING)
 	@Column(name="LIBELLE")
-	private String libelle;
+	private ERole name;
 
 	public Role() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Role(@NotNull String libelle) {
+	public Role(@NotNull ERole name) {
 		super();
-		this.libelle = libelle;
+		this.name = name;
 	}
 
 	public Integer getId() {
@@ -34,12 +37,12 @@ public class Role {
 		this.id = id;
 	}
 
-	public String getLibelle() {
-		return libelle;
+	public ERole getName() {
+		return name;
 	}
 
-	public void setLibelle(String libelle) {
-		this.libelle = libelle;
+	public void setName(ERole name) {
+		this.name = name;
 	}
 	
 	
