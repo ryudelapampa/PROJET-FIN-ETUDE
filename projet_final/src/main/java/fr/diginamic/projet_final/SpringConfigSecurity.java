@@ -32,7 +32,7 @@ public class SpringConfigSecurity extends WebSecurityConfigurerAdapter {
 		/*
 		 * J'autorise tous les accés à mon app web
 		 */
-//		http.csrf().disable().authorizeRequests().anyRequest().permitAll()
+		http.csrf().disable().authorizeRequests().anyRequest().permitAll();
 //		http.csrf().disable().
 //		authenticationProvider(getProvider()).
 //		formLogin().loginProcessingUrl("/login").and()
