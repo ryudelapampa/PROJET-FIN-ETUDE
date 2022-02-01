@@ -30,6 +30,11 @@ public class ControllerAbsence {
 	public Iterable<Absence> getAbsence() {
 		return ca.findAll();
 	}
+	
+	@GetMapping("rttemployeur")
+	public Iterable<Absence> getRttEmployeur(){
+		return ca.getAllRttEmployeur();
+	}
 
 	@GetMapping("{id}")
 	public Optional<Absence> getAbsence(@PathVariable("id") Integer pid) throws Exception {

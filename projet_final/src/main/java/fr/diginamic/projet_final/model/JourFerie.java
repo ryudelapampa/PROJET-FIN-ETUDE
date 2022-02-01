@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name="Jour_Ferie")
 public class JourFerie {
@@ -15,6 +17,8 @@ public class JourFerie {
 	private Integer id;
 	
 	@NotNull
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@Column(name="DATE_JOUR")
 	private Date dateJour;
 	

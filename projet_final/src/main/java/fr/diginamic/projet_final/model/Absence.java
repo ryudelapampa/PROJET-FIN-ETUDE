@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name="Absence")
 public class Absence {
@@ -15,12 +17,14 @@ public class Absence {
 	private Integer id;
 	
 	@NotNull
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@Column(name="DATE_DEBUT")
 	private Date dateDebut;
 	
 	@NotNull
-	@Column(name="DATE_FIN")
-	private Date dateFin;
+	@Column(name="DUREE")
+	private Integer duree;
 	
 	@NotNull
 	@Column(name="TYPE")
@@ -38,11 +42,11 @@ public class Absence {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Absence(@NotNull Date dateDebut, @NotNull Date dateFin, @NotNull String type, @NotNull String motif,
+	public Absence(@NotNull Date dateDebut, @NotNull Integer duree, @NotNull String type, @NotNull String motif,
 			@NotNull String statut) {
 		super();
 		this.dateDebut = dateDebut;
-		this.dateFin = dateFin;
+		this.duree = duree;
 		this.type = type;
 		this.motif = motif;
 		this.statut = statut;
@@ -62,14 +66,6 @@ public class Absence {
 
 	public void setDateDebut(Date dateDebut) {
 		this.dateDebut = dateDebut;
-	}
-
-	public Date getDateFin() {
-		return dateFin;
-	}
-
-	public void setDateFin(Date dateFin) {
-		this.dateFin = dateFin;
 	}
 
 	public String getType() {
@@ -95,6 +91,16 @@ public class Absence {
 	public void setStatut(String statut) {
 		this.statut = statut;
 	}
+
+	public Integer getDuree() {
+		return duree;
+	}
+
+	public void setDuree(Integer duree) {
+		this.duree = duree;
+	}
+	
+	
 	
 	
 

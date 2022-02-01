@@ -44,9 +44,9 @@ public class SpringConfigSecurity extends WebSecurityConfigurerAdapter {
 //		.anyRequest().authenticated().and()
 //		.httpBasic();
 		
-		http.authorizeHttpRequests()
-			.antMatchers("login.vue","/css/**")
-			.permitAll().anyRequest().authenticated().and().formLogin().defaultSuccessUrl(url + "/index.vue", true);
+//		http.authorizeHttpRequests()
+//			.antMatchers("login.vue","/css/**","/api/**","api")
+//			.permitAll().anyRequest().authenticated().and().formLogin().defaultSuccessUrl(url + "/index.vue", true);
 		
 		
 	}
