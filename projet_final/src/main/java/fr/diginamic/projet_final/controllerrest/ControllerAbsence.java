@@ -39,7 +39,7 @@ public class ControllerAbsence {
 	@GetMapping("{id}")
 	public Optional<Absence> getAbsence(@PathVariable("id") Integer pid) throws Exception {
 		if (ca.findById(pid).isEmpty()) {
-			String s = "Absenceorateur non trouveé , id: " + pid + " !!";
+			String s = "Absence non trouveé , id: " + pid + " !!";
 			throw new AbsenceNotFoundException(s);
 		}
 		return ca.findById(pid);
