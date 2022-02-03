@@ -2,6 +2,11 @@ package fr.diginamic.projet_final.exception;
 
 public class JourFerieNotFoundException extends Exception {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public JourFerieNotFoundException() {
 		// TODO Auto-generated constructor stub
 	}

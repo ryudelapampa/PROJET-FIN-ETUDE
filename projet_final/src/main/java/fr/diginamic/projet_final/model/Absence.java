@@ -19,12 +19,8 @@ public class Absence {
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="dd/MM/yyyy")
-	@Column(name="DATE_DEBUT")
-	private Date dateDebut;
-	
-	@NotNull
-	@Column(name="DUREE")
-	private Integer duree;
+	@Column(name="DATE_JOUR")
+	private Date dateJour;
 	
 	@NotNull
 	@Column(name="TYPE")
@@ -42,11 +38,10 @@ public class Absence {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Absence(@NotNull Date dateDebut, @NotNull Integer duree, @NotNull String type, @NotNull String motif,
+	public Absence(@NotNull Date dateJour, @NotNull Integer duree, @NotNull String type, @NotNull String motif,
 			@NotNull String statut) {
 		super();
-		this.dateDebut = dateDebut;
-		this.duree = duree;
+		this.dateJour = dateJour;
 		this.type = type;
 		this.motif = motif;
 		this.statut = statut;
@@ -60,12 +55,12 @@ public class Absence {
 		this.id = id;
 	}
 
-	public Date getDateDebut() {
-		return dateDebut;
+	public Date getDateJour() {
+		return dateJour;
 	}
 
-	public void setDateDebut(Date dateDebut) {
-		this.dateDebut = dateDebut;
+	public void setDateJour(Date dateJour) {
+		this.dateJour = dateJour;
 	}
 
 	public String getType() {
@@ -90,18 +85,5 @@ public class Absence {
 
 	public void setStatut(String statut) {
 		this.statut = statut;
-	}
-
-	public Integer getDuree() {
-		return duree;
-	}
-
-	public void setDuree(Integer duree) {
-		this.duree = duree;
-	}
-	
-	
-	
-	
-
+	}		
 }

@@ -12,6 +12,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name="Collaborateur")
 public class Collaborateur implements UserDetails{
@@ -202,7 +203,6 @@ public class Collaborateur implements UserDetails{
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

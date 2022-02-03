@@ -28,7 +28,6 @@ public class SpringConfigSecurity extends WebSecurityConfigurerAdapter {
 	}
 	
 	protected void configure(HttpSecurity http) throws Exception {
-		// TODO Auto-generated constructor stub
 		/*
 		 * J'autorise tous les accés à mon app web
 		 */
