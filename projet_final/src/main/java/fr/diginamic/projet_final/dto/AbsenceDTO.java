@@ -1,55 +1,49 @@
-package fr.diginamic.projet_final.model;
+package fr.diginamic.projet_final.dto;
 
 import java.util.Date;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
-@Entity
-@Table(name="Absence")
-public class Absence {
+import fr.diginamic.projet_final.model.Absence;
+
+
+public class AbsenceDTO {
 	
-	@Id
-	@Column(name="Id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private Integer id;
-	
-	@NotNull
-	@Temporal(TemporalType.DATE)
+
 	@DateTimeFormat(pattern="dd/MM/yyyy")
-	@Column(name="DATE_JOUR")
 	private Date dateJour;
-	
-	@NotNull
-	@Column(name="TYPE")
+
 	private String type;
-	
-	@NotNull
-	@Column(name="MOTIF")
+
 	private String motif;
 	
-	@NotNull
-	@Column(name="STATUT")
 	private String statut;
+
+	private CollaborateurDTO collaborateur;
 	
-	@ManyToOne
-	@JoinColumn(name="ID_COLLAB")
-	private Collaborateur collaborateur;
-	
-	public Absence() {
+	public AbsenceDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Absence(@NotNull Date dateJour, @NotNull Integer duree, @NotNull String type, @NotNull String motif,
-			@NotNull String statut,@NotNull Collaborateur collaborateur) {
+	public AbsenceDTO(Integer id, Date dateJour, String type,  String motif,
+			 String statut) {
 		super();
+		this.id = id;
 		this.dateJour = dateJour;
 		this.type = type;
 		this.motif = motif;
 		this.statut = statut;
-		this.collaborateur = collaborateur;
+	}
+	
+	public AbsenceDTO(Absence absence) {
+		this.id = absence.getId();
+		this.dateJour = absence.getDateJour();
+		this.type = absence.getType();
+		this.motif = absence.getMotif();
+		this.statut = absence.getStatut();
+		this.collaborateur = new CollaborateurDTO(absence.getCollaborateur());
 	}
 
 	public Integer getId() {
@@ -92,11 +86,11 @@ public class Absence {
 		this.statut = statut;
 	}
 
-	public Collaborateur getCollaborateur() {
+	public CollaborateurDTO getCollaborateur() {
 		return collaborateur;
 	}
 
-	public void setCollaborateur(Collaborateur collaborateur) {
+	public void setCollaborateur(CollaborateurDTO collaborateur) {
 		this.collaborateur = collaborateur;
 	}
 	

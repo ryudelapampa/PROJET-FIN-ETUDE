@@ -1,5 +1,7 @@
 package fr.diginamic.projet_final.model;
 
+import java.util.List;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -16,6 +18,9 @@ public class Role {
 	@NotNull
 	@Column(name="LIBELLE")
 	private String libelle;
+	
+	@OneToMany(mappedBy="role")
+	private List<Collaborateur> collaborateurs;
 
 	public Role() {
 		// TODO Auto-generated constructor stub

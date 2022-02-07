@@ -18,11 +18,6 @@ public class ControllerGeneralError {
 		// TODO Auto-generated constructor stub
 	}
 
-	@ExceptionHandler(value = { Exception.class })
-	public ResponseEntity<String> onError(Exception ex) {
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Other Error :" + ex.getMessage());
-	}
-
 	@ExceptionHandler(value = { AbsenceNotFoundException.class })
 	public ResponseEntity<String> onErrorAbsence(AbsenceNotFoundException ex) {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("AbsenceError :" + ex.getMessage());

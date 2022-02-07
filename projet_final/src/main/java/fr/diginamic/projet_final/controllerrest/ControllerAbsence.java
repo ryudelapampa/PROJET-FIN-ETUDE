@@ -1,6 +1,8 @@
 package fr.diginamic.projet_final.controllerrest;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -8,8 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import fr.diginamic.projet_final.dto.AbsenceDTO;
 import fr.diginamic.projet_final.exception.AbsenceNotFoundException;
 import fr.diginamic.projet_final.model.Absence;
 import fr.diginamic.projet_final.repository.iCrudAbsence;
@@ -21,7 +32,6 @@ public class ControllerAbsence {
 
 	@Autowired
 	iCrudAbsence ca;
-
 	public ControllerAbsence() {
 		// TODO Auto-generated constructor stub
 	}
@@ -32,8 +42,14 @@ public class ControllerAbsence {
 	}
 	
 	@GetMapping("rttemployeur")
-	public Iterable<Absence> getRttEmployeur(){
-		return ca.getAllRttEmployeur();
+	public Set<AbsenceDTO> getRttEmployeur(){
+		Iterable<Absence> mesAbsences = ca.getAllRttEmployeur();
+		Set<AbsenceDTO> mesAbsencesDTO = new HashSet<AbsenceDTO>();
+		for (Absence abs : mesAbsences) {
+			AbsenceDTO absDTO = new AbsenceDTO(abs);
+			mesAbsencesDTO.add(absDTO);
+		}
+		return mesAbsencesDTO;
 	}
 
 	@GetMapping("{id}")
@@ -42,12 +58,12 @@ public class ControllerAbsence {
 			String s = "Absence non trouveé , id: " + pid + " !!";
 			throw new AbsenceNotFoundException(s);
 		}
+		
 		return ca.findById(pid);
 	}
 
 	@PostMapping
-	public Absence addAbsence(@Valid @RequestBody Absence absence, BindingResult result)
-			throws AbsenceNotFoundException {
+	public Absence addAbsence(@Valid @RequestBody Absence absence, BindingResult result) throws AbsenceNotFoundException {
 		if (result.hasErrors()) {
 			String s = result.toString();
 			throw new AbsenceNotFoundException(s);

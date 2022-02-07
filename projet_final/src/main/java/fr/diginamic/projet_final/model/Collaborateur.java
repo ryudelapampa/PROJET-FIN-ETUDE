@@ -3,6 +3,7 @@ package fr.diginamic.projet_final.model;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -11,6 +12,10 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 
 @SuppressWarnings("serial")
 @Entity
@@ -51,56 +56,68 @@ public class Collaborateur implements UserDetails{
 	@Column(name="TELEPHONE")
 	private Integer telephone;
 	
-	@NotNull
-	@ManyToMany
-	@JoinTable(name="COLAB_ROLE",
-		joinColumns= @JoinColumn(name="COLAB_ID", referencedColumnName="ID"),
-		inverseJoinColumns= @JoinColumn(name="ROLE_ID", referencedColumnName="ID"))
-	private Set<Role> roles;
-
-	@OneToMany
-	@JoinTable(name = "COLAB_ABSENCE",
-		joinColumns = @JoinColumn(name = "COLAB_ID", referencedColumnName="ID"),
-		inverseJoinColumns = @JoinColumn(name="ABSENCE_ID", referencedColumnName="ID"))
-	private Set<Absence> absences;
-	
+//	@NotNull
+//	@ManyToMany
+//	@JoinTable(name="COLAB_ROLE",
+//		joinColumns= @JoinColumn(name="COLAB_ID", referencedColumnName="ID"),
+//		inverseJoinColumns= @JoinColumn(name="ROLE_ID", referencedColumnName="ID"))
+//	private Set<Role> roles;
 	
 	@ManyToOne
-	@JoinTable(name = "COLAB_SERVICE",
-			joinColumns = @JoinColumn(name = "COLAB_ID"),
-			inverseJoinColumns = @JoinColumn(name="SERVICE_ID"))
+	@JoinColumn(name="ID_ROLE")
+	private Role role;
+
+	@JsonIgnore
+	@OneToMany(mappedBy="collaborateur")
+	private Set<Absence> absences;
+	
+	@ManyToOne
+	@JoinColumn(name="ID_SERVICE")
 	private Service service;
+	
+	@ManyToOne
+	@JoinColumn(name="ID_CHEF")
+	private Collaborateur chef;
+	
+	@OneToMany(mappedBy="chef")
+	private List<Collaborateur> subordonnes;
 	
 	public Collaborateur() {
 		
 	}
 
+	/*
+	 * CONSTRUCTEUR COMPLET
+	 */
 	public Collaborateur(@NotNull String nom, @NotNull String prenom, @NotNull Date dateEmbauche, @NotNull String email,
-			@NotNull Integer telephone, @NotNull Set<Role> roles, Set<Absence> absences, String password) {
+			@NotNull Integer telephone, @NotNull Role role, Set<Absence> absences, String password, Service service) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.dateEmbauche = dateEmbauche;
 		this.email = email;
 		this.telephone = telephone;
-		this.roles = roles;
+		this.role = role;
 		this.absences = absences;
-//		this.service = service;
+		this.service = service;
 		this.username = email;
 		this.password = password;
 	}
 	
+	/*
+	 * CONSTRUCTEUR avec liste absence vide 
+	 */
 	public Collaborateur(@NotNull String nom, @NotNull String prenom, @NotNull Date dateEmbauche, @NotNull String email,
-			@NotNull Integer telephone, @NotNull Set<Role> roles,String password)  {
+			@NotNull Integer telephone, @NotNull Role role,String password, Service service)  {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.dateEmbauche = dateEmbauche;
 		this.email = email;
 		this.telephone = telephone;
-		this.roles = roles;
+		this.role = role;
 		this.absences = new HashSet<Absence>();
-//		this.service = service;
+		this.service = service;
 		this.username = email;
 		this.password = password;
 	}
@@ -153,12 +170,12 @@ public class Collaborateur implements UserDetails{
 		this.telephone = telephone;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
+	public Role getRole() {
+		return role;
 	}
 
-	public void setRole(Set<Role> roles) {
-		this.roles = roles;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	public Set<Absence> getAbsences() {
@@ -169,7 +186,33 @@ public class Collaborateur implements UserDetails{
 		this.absences = absences;
 	}
 	
+	public Service getService() {
+		return service;
+	}
+
+	public void setService(Service service) {
+		this.service = service;
+	}
+	
+	
+	
 	//SECURITY
+
+	public Collaborateur getChef() {
+		return chef;
+	}
+
+	public void setChef(Collaborateur chef) {
+		this.chef = chef;
+	}
+
+	public List<Collaborateur> getSubordonnes() {
+		return subordonnes;
+	}
+
+	public void setSubordonnes(List<Collaborateur> subordonnes) {
+		this.subordonnes = subordonnes;
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
