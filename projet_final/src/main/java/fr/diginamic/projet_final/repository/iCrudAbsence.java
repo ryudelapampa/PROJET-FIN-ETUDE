@@ -10,7 +10,7 @@ public interface iCrudAbsence extends CrudRepository<Absence, Integer> {
 	@Query("select a from Absence a where a.type = 'RTT_EMPLOYEUR' ")
 	public Iterable<Absence> getAllRttEmployeur();
 
-	@Query("select a from Absence a where a.type = 'RTT_EMPLOYEUR' and a.statut = 'INITIALE'")
+	@Query("select a from Absence a where a.type = 'RTT_EMPLOYEUR' and a.statut = 'INITIAL'")
 	public Iterable<Absence> getAllRttEmployeurInitiale();
 	
 }

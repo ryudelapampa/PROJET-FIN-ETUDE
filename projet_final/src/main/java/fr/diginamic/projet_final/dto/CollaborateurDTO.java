@@ -1,7 +1,9 @@
 package fr.diginamic.projet_final.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import fr.diginamic.projet_final.model.Absence;
@@ -27,6 +29,10 @@ public class CollaborateurDTO {
 
 	private ServiceDTO service;
 	
+	private CollaborateurDTO chef;
+	
+	private List<CollaborateurDTO> subordonnes;
+	
 	public CollaborateurDTO() {
 		
 	}
@@ -35,7 +41,8 @@ public class CollaborateurDTO {
 	 * CONSTRUCTEUR COMPLET
 	 */
 	public CollaborateurDTO( String nom,  String prenom,  Date dateEmbauche,  String email,
-			 Integer telephone,  RoleDTO role, Set<AbsenceDTO> absences,  ServiceDTO service) {
+			 Integer telephone,  RoleDTO role, Set<AbsenceDTO> absences,  ServiceDTO service,
+			 CollaborateurDTO chef, List<CollaborateurDTO> subordonnes) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -45,7 +52,8 @@ public class CollaborateurDTO {
 		this.role = role;
 		this.absences = absences;
 		this.service = service;
-
+		this.chef = chef;
+		this.subordonnes = subordonnes;
 	}
 	
 	public CollaborateurDTO(Collaborateur collaborateur) {
@@ -63,6 +71,12 @@ public class CollaborateurDTO {
 		}
 		if (collaborateur.getService() != null) {
 			this.service = new ServiceDTO(collaborateur.getService());
+		}
+//		this.chef = new CollaborateurDTO(collaborateur.getChef());
+		this.subordonnes = new ArrayList<CollaborateurDTO>();
+		for (Collaborateur collab : collaborateur.getSubordonnes()) {
+			CollaborateurDTO collabDTO = new CollaborateurDTO(collab);
+			this.subordonnes.add(collabDTO);
 		}
 	}
 	
@@ -153,5 +167,21 @@ public class CollaborateurDTO {
 
 	public void setService(ServiceDTO service) {
 		this.service = service;
+	}
+
+	public List<CollaborateurDTO> getSubordonnes() {
+		return subordonnes;
+	}
+
+	public void setSubordonnes(List<CollaborateurDTO> subordonnes) {
+		this.subordonnes = subordonnes;
+	}
+
+	public CollaborateurDTO getChef() {
+		return chef;
+	}
+
+	public void setChef(CollaborateurDTO chef) {
+		this.chef = chef;
 	}
 }

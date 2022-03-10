@@ -90,7 +90,8 @@ public class Collaborateur implements UserDetails{
 	 * CONSTRUCTEUR COMPLET
 	 */
 	public Collaborateur(@NotNull String nom, @NotNull String prenom, @NotNull Date dateEmbauche, @NotNull String email,
-			@NotNull Integer telephone, @NotNull Role role, Set<Absence> absences, String password, Service service) {
+			@NotNull Integer telephone, @NotNull Role role, Set<Absence> absences, String password, Service service,
+			 List<Collaborateur> subordonnes) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -102,13 +103,16 @@ public class Collaborateur implements UserDetails{
 		this.service = service;
 		this.username = email;
 		this.password = password;
+//		this.chef = chef;
+		this.subordonnes = subordonnes;
 	}
 	
 	/*
 	 * CONSTRUCTEUR avec liste absence vide 
 	 */
 	public Collaborateur(@NotNull String nom, @NotNull String prenom, @NotNull Date dateEmbauche, @NotNull String email,
-			@NotNull Integer telephone, @NotNull Role role,String password, Service service)  {
+			@NotNull Integer telephone, @NotNull Role role,String password, Service service,
+			 List<Collaborateur> subordonnes)  {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -120,6 +124,8 @@ public class Collaborateur implements UserDetails{
 		this.service = service;
 		this.username = email;
 		this.password = password;
+//		this.chef = chef;
+		this.subordonnes = subordonnes;
 	}
 
 	public Integer getId() {
@@ -194,10 +200,6 @@ public class Collaborateur implements UserDetails{
 		this.service = service;
 	}
 	
-	
-	
-	//SECURITY
-
 	public Collaborateur getChef() {
 		return chef;
 	}
@@ -213,6 +215,8 @@ public class Collaborateur implements UserDetails{
 	public void setSubordonnes(List<Collaborateur> subordonnes) {
 		this.subordonnes = subordonnes;
 	}
+	
+	//SECURITY
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

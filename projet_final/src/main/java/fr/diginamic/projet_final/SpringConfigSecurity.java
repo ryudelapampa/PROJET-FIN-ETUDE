@@ -15,7 +15,7 @@ import fr.diginamic.projet_final.services.UserService;
 @EnableWebSecurity
 public class SpringConfigSecurity extends WebSecurityConfigurerAdapter {
 	
-	String url = "http://localhost:8084";
+	String url = "http://localhost:8080/";
 	
 	@Autowired
 	UserService userDetailsService;
@@ -31,21 +31,21 @@ public class SpringConfigSecurity extends WebSecurityConfigurerAdapter {
 		/*
 		 * J'autorise tous les accés à mon app web
 		 */
-		http.csrf().disable().authorizeRequests().anyRequest().permitAll();
-//		http.csrf().disable().
-//		authenticationProvider(getProvider()).
-//		formLogin().loginProcessingUrl("/login").and()
-//		.logout().logoutUrl("/logout").invalidateHttpSession(true).and()
-//		.authorizeRequests()
-//		.antMatchers("/login").permitAll()
-//		.antMatchers("/logout").permitAll()
-//		.antMatchers("/api/**").permitAll()
-//		.anyRequest().authenticated().and()
-//		.httpBasic();
+//		http.csrf().disable().authorizeRequests().anyRequest().permitAll();
+		
+		http.csrf().disable().
+		authenticationProvider(getProvider()).
+		formLogin().loginProcessingUrl("/login").and()
+		.logout().logoutUrl("/logout").invalidateHttpSession(true).and()
+		.authorizeRequests()
+		.antMatchers("/login").permitAll()
+		.antMatchers("/logout").permitAll()
+		.anyRequest().authenticated().and()
+		.httpBasic();
 		
 //		http.authorizeHttpRequests()
-//			.antMatchers("login.vue","/css/**","/api/**","api")
-//			.permitAll().anyRequest().authenticated().and().formLogin().defaultSuccessUrl(url + "/index.vue", true);
+//			.antMatchers("/login","/logout","/css/**")
+//			.permitAll().anyRequest().authenticated().and().formLogin().defaultSuccessUrl("/index.html", true);
 		
 		
 	}

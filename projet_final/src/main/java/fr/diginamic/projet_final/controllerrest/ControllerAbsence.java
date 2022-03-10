@@ -92,7 +92,8 @@ public class ControllerAbsence {
 			String s = "Absence non trouvé, id: " + pid + " !!";
 			throw new AbsenceNotFoundException(s);
 		}
-		return ca.save(absence);
+		Absence absenceValid = ca.findById(absence.getId()).get();
+		return ca.save(absenceValid);
 	}
 
 }
